@@ -2,6 +2,7 @@
 namespace Automattic\WooCommerce\StoreApi\Routes\V1;
 
 use Automattic\WooCommerce\StoreApi\Exceptions\RouteException;
+use Automattic\WooCommerce\Blocks\Package;
 
 /**
  * CartSelectShippingRate class.
@@ -68,6 +69,11 @@ class CartSelectShippingRate extends AbstractCartRoute {
 			throw new RouteException( 'woocommerce_rest_cart_missing_package_id', __( 'Invalid Package ID.', 'woo-gutenberg-products-block' ), 400 );
 		}
 
+		if ( Package::feature()->is_experimental_build() ) {
+			// This is a temporary measure until we can bring such change to WooCommerce core.
+			add_filter( 'woocommerce_get_shipping_methods', [ $this->cart_controller, 'enable_local_pickup_without_address' ] );
+		}
+
 		$cart       = $this->cart_controller->get_cart_instance();
 		$package_id = wc_clean( wp_unslash( $request['package_id'] ) );
 		$rate_id    = wc_clean( wp_unslash( $request['rate_id'] ) );
@@ -81,6 +87,11 @@ class CartSelectShippingRate extends AbstractCartRoute {
 		$cart->calculate_shipping();
 		$cart->calculate_totals();
 
-		return rest_ensure_response( $this->schema->get_item_response( $cart ) );
+		$response = rest_ensure_response( $this->schema->get_item_response( $cart ) );
+		if ( Package::feature()->is_experimental_build() ) {
+			// This is a temporary measure until we can bring such change to WooCommerce core.
+			remove_filter( 'woocommerce_get_shipping_methods', [ $this->cart_controller, 'enable_local_pickup_without_address' ] );
+		}
+		return $response;
 	}
 }
