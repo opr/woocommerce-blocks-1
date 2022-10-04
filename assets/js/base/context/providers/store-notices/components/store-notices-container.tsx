@@ -4,6 +4,7 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Notice } from 'wordpress-components';
+import type { Notice as NoticeType } from '@types/wordpress__notices';
 import { sanitize } from 'dompurify';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { PAYMENT_METHOD_DATA_STORE_KEY } from '@woocommerce/block-data';
@@ -16,13 +17,16 @@ import './style.scss';
 const ALLOWED_TAGS = [ 'a', 'b', 'em', 'i', 'strong', 'p', 'br' ];
 const ALLOWED_ATTR = [ 'target', 'href', 'rel', 'name', 'download' ];
 
-const sanitizeHTML = ( html ) => {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const sanitizeHTML = ( html: string ): { __html: string } => {
 	return {
 		__html: sanitize( html, { ALLOWED_TAGS, ALLOWED_ATTR } ),
 	};
 };
 
-const getWooClassName = ( { status = 'default' } ) => {
+const getWooClassName = ( {
+	status = 'default',
+} ): 'woocommerce-error' | 'woocommerce-message' | 'woocommerce-info' | '' => {
 	switch ( status ) {
 		case 'error':
 			return 'woocommerce-error';
@@ -35,11 +39,17 @@ const getWooClassName = ( { status = 'default' } ) => {
 	return '';
 };
 
+interface StoreNoticesContainerProps {
+	className?: string;
+	context?: string;
+	additionalNotices: NoticeType[];
+}
+
 export const StoreNoticesContainer = ( {
 	className,
 	context = 'default',
 	additionalNotices = [],
-} ) => {
+}: StoreNoticesContainerProps ): JSX.Element | null => {
 	const isExpressPaymentMethodActive = useSelect( ( select ) =>
 		select( PAYMENT_METHOD_DATA_STORE_KEY ).isExpressPaymentMethodActive()
 	);
@@ -68,6 +78,10 @@ export const StoreNoticesContainer = ( {
 				<Notice
 					key={ `store-notice-${ props.id }` }
 					{ ...props }
+					// Explicitly setting __unstableHTML to false to override the value in props. This is so we can
+					// decide what to render as the children. If it is not false, Notice will render a RawHTML component
+					// as its children.
+					//__unstableHTML={ false }
 					className={ classnames(
 						'wc-block-components-notices__notice',
 						getWooClassName( props )
