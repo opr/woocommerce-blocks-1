@@ -78,11 +78,15 @@ export const StoreNoticesContainer = ( {
 						}
 					} }
 				>
-					<span
-						dangerouslySetInnerHTML={ sanitizeHTML(
-							props.content
-						) }
-					/>
+					{ props.__unstableHTML ? (
+						sanitizeHTML( props.content )?.__html
+					) : (
+						<span
+							dangerouslySetInnerHTML={ sanitizeHTML(
+								props.content
+							) }
+						/>
+					) }
 				</Notice>
 			) ) }
 		</div>
