@@ -84,7 +84,3 @@ export const getCurrentStatus = ( state: PaymentMethodDataState ) => {
 export const getShouldSavePaymentMethod = ( state: PaymentMethodDataState ) => {
 	return state.shouldSavePaymentMethod;
 };
-
-export const getState = ( state: PaymentMethodDataState ) => {
-	return state;
-};
