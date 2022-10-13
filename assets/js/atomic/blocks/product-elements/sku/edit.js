@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import EditProductLink from '@woocommerce/editor-components/edit-product-link';
+import { useEffect } from 'react';
 
 /**
  * Internal dependencies
@@ -11,11 +12,22 @@ import Block from './block';
 import withProductSelector from '../shared/with-product-selector';
 import { BLOCK_TITLE, BLOCK_ICON } from './constants';
 
-const Edit = ( { attributes } ) => {
+const Edit = ( { attributes, setAttributes, context } ) => {
+	const blockAttrs = {
+		...attributes,
+		...context,
+	};
+	const isDescendentOfQueryLoop = Number.isFinite( context.queryId );
+
+	useEffect(
+		() => setAttributes( { isDescendentOfQueryLoop } ),
+		[ setAttributes, isDescendentOfQueryLoop ]
+	);
+
 	return (
 		<>
 			<EditProductLink />
-			<Block { ...attributes } />
+			<Block { ...blockAttrs } />
 		</>
 	);
 };

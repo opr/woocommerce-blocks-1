@@ -19,6 +19,12 @@ const blockConfig = {
 	title,
 	description,
 	icon: { src: icon },
+	usesContext: [ 'query', 'queryId', 'postId' ],
+	parent: [
+		'@woocommerce/all-products',
+		'@woocommerce/single-product',
+		'core/post-template',
+	],
 	attributes,
 	edit,
 };
