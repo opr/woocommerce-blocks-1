@@ -104,6 +104,13 @@ export const __internalSetPaymentMethodData = (
 	paymentMethodData,
 } );
 
+export const setIncompatiblePaymentMethods = (
+	incompatiblePaymentMethods: Array< string > = []
+) => ( {
+	type: ACTION_TYPES.SET_INCOMPATIBLE_PAYMENT_METHODS,
+	incompatiblePaymentMethods,
+} );
+
 /**
  * Set the available payment methods.
  * An available payment method is one that has been validated and can make a payment.

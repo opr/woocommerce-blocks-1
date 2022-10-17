@@ -33,6 +33,13 @@ const reducer: Reducer< PaymentMethodDataState > = (
 			};
 			break;
 
+		case ACTION_TYPES.SET_INCOMPATIBLE_PAYMENT_METHODS:
+			newState = {
+				...state,
+				incompatiblePaymentMethods: action.incompatiblePaymentMethods,
+			};
+			break;
+
 		case ACTION_TYPES.SET_PAYMENT_STATUS:
 			newState = {
 				...state,
