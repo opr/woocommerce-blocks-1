@@ -29,12 +29,14 @@ const Block = ( {
 	showPhoneField = false,
 	requireCompanyField = false,
 	requirePhoneField = false,
+	showBillingAddress = false,
 }: {
 	showCompanyField: boolean;
 	showApartmentField: boolean;
 	showPhoneField: boolean;
 	requireCompanyField: boolean;
 	requirePhoneField: boolean;
+	showBillingAddress: boolean;
 } ): JSX.Element => {
 	const {
 		defaultAddressFields,
@@ -58,6 +60,10 @@ const Block = ( {
 			setShippingPhone( '' );
 		}
 	}, [ showPhoneField, setShippingPhone ] );
+
+	useEffect( () => {
+		setUseShippingAsBilling( ! showBillingAddress );
+	}, [ showBillingAddress, setUseShippingAsBilling ] );
 
 	// Run this on first render to ensure addresses sync if needed, there is no need to re-run this when toggling the
 	// checkbox.

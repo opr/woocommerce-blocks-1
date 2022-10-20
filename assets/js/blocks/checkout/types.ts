@@ -18,4 +18,5 @@ export interface Attributes extends Record< string, boolean | number > {
 	showReturnToCart: boolean;
 	showRateAfterTaxName: boolean;
 	cartPageId: number;
+	showBillingAddress: boolean;
 }

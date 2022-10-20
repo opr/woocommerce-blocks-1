@@ -28,6 +28,7 @@ const FrontendBlock = ( {
 	showApartmentField: boolean;
 	showCompanyField: boolean;
 	showPhoneField: boolean;
+	showBillingAddress: boolean;
 	showStepNumber: boolean;
 	children: JSX.Element;
 	className?: string;

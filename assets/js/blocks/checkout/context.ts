@@ -18,6 +18,7 @@ export type CheckoutBlockContextProps = {
 	showReturnToCart: boolean;
 	cartPageId: number;
 	showRateAfterTaxName: boolean;
+	showBillingAddress: boolean;
 };
 
 export type CheckoutBlockControlsContextProps = {
@@ -38,6 +39,7 @@ export const CheckoutBlockContext: React.Context< CheckoutBlockContextProps > =
 		showReturnToCart: true,
 		cartPageId: 0,
 		showRateAfterTaxName: false,
+		showBillingAddress: false,
 	} );
 
 export const CheckoutBlockControlsContext: React.Context< CheckoutBlockControlsContextProps > =

@@ -20,6 +20,10 @@ export default {
 		type: 'string',
 		default: '',
 	},
+	showBillingAddress: {
+		type: 'boolean',
+		default: false,
+	},
 	lock: {
 		type: 'object',
 		default: {

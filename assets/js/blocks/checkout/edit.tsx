@@ -64,6 +64,7 @@ export const Edit = ( {
 		showReturnToCart,
 		showRateAfterTaxName,
 		cartPageId,
+		showBillingAddress,
 	} = attributes;
 
 	const defaultTemplate = [
@@ -158,9 +159,32 @@ export const Edit = ( {
 					/>
 				) }
 			</PanelBody>
+			<PanelBody
+				title={ __(
+					'Billing Address Form',
+					'woo-gutenberg-products-block'
+				) }
+			>
+				<p className="wc-block-checkout__controls-text">
+					{ __(
+						'Show or hide the billing address form by default',
+						'woo-gutenberg-products-block'
+					) }
+				</p>
+
+				<ToggleControl
+					label={ __(
+						'Show billing address form',
+						'woo-gutenberg-products-block'
+					) }
+					checked={ showBillingAddress }
+					onChange={ () => toggleAttribute( 'showBillingAddress' ) }
+				/>
+			</PanelBody>
 			<CartCheckoutFeedbackPrompt />
 		</InspectorControls>
 	);
+
 	const blockProps = useBlockPropsWithLocking();
 	return (
 		<div { ...blockProps }>
@@ -198,6 +222,7 @@ export const Edit = ( {
 									showReturnToCart,
 									cartPageId,
 									showRateAfterTaxName,
+									showBillingAddress,
 								} }
 							>
 								<InnerBlocks

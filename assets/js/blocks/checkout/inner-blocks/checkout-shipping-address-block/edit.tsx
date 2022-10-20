@@ -37,9 +37,11 @@ export const Edit = ( {
 		requireCompanyField,
 		showPhoneField,
 		requirePhoneField,
+		showBillingAddress,
 	} = useCheckoutBlockContext();
 	const { addressFieldControls: Controls } =
 		useCheckoutBlockControlsContext();
+
 	return (
 		<FormStepBlock
 			setAttributes={ setAttributes }
@@ -56,6 +58,7 @@ export const Edit = ( {
 				requireCompanyField={ requireCompanyField }
 				showPhoneField={ showPhoneField }
 				requirePhoneField={ requirePhoneField }
+				showBillingAddress={ showBillingAddress }
 			/>
 			<AdditionalFields block={ innerBlockAreas.SHIPPING_ADDRESS } />
 		</FormStepBlock>
