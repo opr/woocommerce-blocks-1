@@ -57,7 +57,8 @@ export const Edit = ( { className, attributes, setAttributes, clientId } ) => {
 	const { hasDarkControls } = attributes;
 	const { currentView, component: ViewSwitcherComponent } = useViewSwitcher(
 		clientId,
-		views
+		views,
+		'woocommerce/cart'
 	);
 	const defaultTemplate = [
 		[ 'woocommerce/filled-cart-block', {}, [] ],
