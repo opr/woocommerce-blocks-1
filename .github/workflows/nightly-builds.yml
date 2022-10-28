@@ -32,8 +32,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # 80943895 is the release ID of this nightly release https://github.com/woocommerce/woocommerce-blocks/releases/tag/nightly
-          upload_url: https://uploads.github.com/repos/${{ github.repository }}/releases/81358569/assets{?name,label}
-          release_id: 81358569
+          upload_url: https://uploads.github.com/repos/${{ github.repository }}/releases/81364505/assets{?name,label}
+          release_id: 81364505
           asset_path: woocommerce-gutenberg-products-block.zip
           asset_name: woocommerce-blocks-${{ matrix.build }}-nightly.zip
           asset_content_type: application/zip
